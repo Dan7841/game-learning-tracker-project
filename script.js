@@ -3,15 +3,22 @@ let level = 1;
 
 const xpDisplay = document.getElementById("xp");
 const levelDisplay = document.getElementById("level");
-const button = document.getElementById("completeQuest");
+const questButtons = document.querySelectorAll(".quest");
 
-button.addEventListener("click", function () {
-    xp += 20;
+questButtons.forEach(button => {
+    button.addEventListener("click", function () {
+        const reward = parseInt(button.getAttribute("data-xp"));
 
-    if (xp >= level * 100) {
-        level++;
-    }
+        xp += reward;
 
-    xpDisplay.textContent = xp;
-    levelDisplay.textContent = level;
+        if (xp >= level * 100) {
+            level++;
+        }
+
+        xpDisplay.textContent = xp;
+        levelDisplay.textContent = level;
+
+        button.disabled = true;
+
+    });
 });
